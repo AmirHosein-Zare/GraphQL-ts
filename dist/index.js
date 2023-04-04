@@ -10,8 +10,16 @@ const graphql_yoga_1 = require("graphql-yoga");
 const schema_1 = require("@graphql-tools/schema");
 const load_files_1 = require("@graphql-tools/load-files");
 const typesArray = (0, load_files_1.loadFilesSync)(path_1.default.join(__dirname, '**/*.graphql'));
+const Product_model_1 = require("./Model/products/Product.model");
 const schema = (0, schema_1.makeExecutableSchema)({
-    typeDefs: typesArray
+    typeDefs: typesArray,
+    resolvers: {
+        Query: {
+            products: () => {
+                return Product_model_1.Product;
+            }
+        }
+    }
 });
 app.use('/graphql', (0, graphql_yoga_1.createYoga)({
     schema: schema,
