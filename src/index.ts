@@ -7,13 +7,14 @@ import { createYoga} from "graphql-yoga";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { loadFilesSync } from "@graphql-tools/load-files";
 
-const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
-const resolversArray = loadFilesSync(path.join(__dirname, '**/*.resolver.ts'))
+const typesArray = loadFilesSync(path.join(__dirname, '../src/**/*.graphql'));
+const resolversArray = loadFilesSync(path.join(__dirname, '../src/**/*.resolve.ts'));
 
 const schema = makeExecutableSchema({
     typeDefs: typesArray,
     resolvers: resolversArray
 })
+
 
 app.use('/graphql', createYoga({
     schema: schema,
